@@ -7,12 +7,13 @@ const {
         TwoZeroFourEight,
         TicTacToe,
         Connect4
-    } = require("discord-gamecord");
+    } = require("discord-gamecord"),
+    Lang = require("../locales/pt-BR.json");
 
 module.exports = class Command {
     /**
      * 
-     * @param {ChatInputCommandInteraction} int 
+     * @param {ChatInputCommandInteraction} int
      */
     async emojify(int){
         int.reply({ ephemeral: true, content: Emojify(int.options.getString("message")) });
@@ -21,8 +22,9 @@ module.exports = class Command {
     /**
      * 
      * @param {ChatInputCommandInteraction} int 
+     * @param {Lang} lang
      */
-    async tzfe(int) {
+    async tzfe(int, lang) {
         const Game = new TwoZeroFourEight({
             message: int,
             isSlashGame: true,
@@ -38,7 +40,7 @@ module.exports = class Command {
             },
             timeoutTime: 60000,
             buttonStyle: 'PRIMARY',
-            playerOnlyMessage: 'Only {player} can use these buttons.'
+            playerOnlyMessage: lang.tzfe,
         });
 
         Game.startGame();
