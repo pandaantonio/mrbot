@@ -2,20 +2,19 @@ const {
     SlashCommandBuilder,
     ChatInputCommandInteraction,
 } = require("discord.js"),
-    { 
+    {
         TwoZeroFourEight,
-        TicTacToe,
         Connect4
     } = require("discord-gamecord"),
+    TicTacToe = require("../games/TicTacToeGame"),
     Lang = require("../locales/pt-BR.json");
 
 module.exports = class Command {
     /**
-     * 
-     * @param {ChatInputCommandInteraction} int 
-     * @param {Lang} lang
+     * @param {Lang} param1
+     * @param {ChatInputCommandInteraction} param0 
      */
-    async 2048(int, lang) {
+    async 2048({ int, lang }) {
         const Game = new TwoZeroFourEight({
             message: int,
             isSlashGame: true,
@@ -38,10 +37,10 @@ module.exports = class Command {
     }
 
     /**
-     * 
-     * @param {ChatInputCommandInteraction} int 
+     * @param {Lang} param1
+     * @param {ChatInputCommandInteraction} param0 
      */
-    async connect4(int) {
+    async connect4({ int }) {
         const Game = new Connect4({
             message: int,
             isSlashGame: true,
@@ -70,45 +69,35 @@ module.exports = class Command {
     }
 
     /**
-     * 
-     * @param {ChatInputCommandInteraction} int 
+     * @param {Lang} param1
+     * @param {ChatInputCommandInteraction} param0 
      */
-    async ttt(int) {
-        const player = int.options.getUser("player");
-
-        if (player.id === int.user.id) {
-            int.reply({ ephemeral: true, content: `Você Não Pode Jogar Contra Si Mesmo.` })
-        } else if (player.bot === true) {
-            int.reply({ ephemeral: true, content: `Você Não Pode Jogar Contra Bots.` });
-        } else {
-            const Game = new TicTacToe({
-                message: int,
-                isSlashGame: true,
-                opponent: int.options.getUser("player"),
-                embed: {
-                    title: 'Tic Tac Toe',
-                    color: '#5865F2',
-                    statusTitle: 'Status',
-                    overTitle: 'Game Over'
-                },
-                emojis: {
-                    xButton: '❌',
-                    oButton: '🔵',
-                    blankButton: '➖'
-                },
-                mentionUser: true,
-                timeoutTime: 60000,
-                xButtonStyle: 'DANGER',
-                oButtonStyle: 'PRIMARY',
-                turnMessage: '{emoji} | Its turn of player **{player}**.',
-                winMessage: '{emoji} | **{player}** won the TicTacToe Game.',
-                tieMessage: 'The Game tied! No one won the Game!',
-                timeoutMessage: 'The Game went unfinished! No one won the Game!',
-                playerOnlyMessage: 'Only {player} and {opponent} can use these buttons.'
-            });
-
-            Game.startGame();
-        }
+    async ttt({ int }) {
+        new TicTacToe({
+            message: int,
+            isSlashGame: true,
+            opponent: int.options.getUser("player"),
+            embed: {
+                title: 'Tic Tac Toe',
+                color: '#5865F2',
+                statusTitle: 'Status',
+                overTitle: 'Game Over'
+            },
+            emojis: {
+                xButton: '✖',
+                oButton: '⚫',
+                blankButton: '➖'
+            },
+            mentionUser: true,
+            timeoutTime: 60000,
+            xButtonStyle: 'DANGER',
+            oButtonStyle: 'PRIMARY',
+            turnMessage: '{emoji} | Its turn of player **{player}**.',
+            winMessage: '{emoji} | **{player}** won the TicTacToe Game.',
+            tieMessage: 'The Game tied! No one won the Game!',
+            timeoutMessage: 'The Game went unfinished! No one won the Game!',
+            playerOnlyMessage: 'Only {player} and {opponent} can use these buttons.'
+        }).startGame();
     }
 
     data = new SlashCommandBuilder()
