@@ -72,9 +72,9 @@ module.exports = class Command {
      * @param {Lang} lang
      * @param {ChatInputCommandInteraction} int 
      */
-    async ttt(int, lang) {
+    async tictactoe(int, lang) {
         await int.deferReply();
-        
+
         new TicTacToe({
             message: int,
             opponent: int.options.getUser("player"),
@@ -135,9 +135,9 @@ module.exports = class Command {
                 )
         ).addSubcommand(
             (sub) => sub
-                .setName("ttt")
+                .setName("tictactoe")
                 .setNameLocalizations({
-                    "pt-BR": "jv"
+                    "pt-BR": "jogodavelha"
                 })
                 .setDescription("Play Tic Tac Toe With Friends!")
                 .setDescriptionLocalizations({
