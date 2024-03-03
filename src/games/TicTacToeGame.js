@@ -7,8 +7,7 @@ module.exports = class TicTacToe extends approve {
         options = {
             message, opponent, tieMessage,
             timeoutTime, xButtonStyle, oButtonStyle, turnMessage, winMessage, timeoutMessage, requestMessage, rejectMessage,
-            embed: { title, statusTitle, overTitle, color },
-            emojis: { xButton, oButton, blankButton }
+            embed: { title, statusTitle, overTitle, color }
         }
     ) {
         super(options);
@@ -16,6 +15,11 @@ module.exports = class TicTacToe extends approve {
         this.options = options;
         this.message = options.message;
         this.opponent = options.opponent;
+        this.options.emojis = {
+            xButton: '✖',
+            oButton: '⚫',
+            blankButton: '➖'
+        }
         this.gameBoard = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         this.player1Turn = true;
     }

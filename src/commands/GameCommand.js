@@ -69,10 +69,12 @@ module.exports = class Command {
     }
 
     /**
-     * @param {Lang} param1
-     * @param {ChatInputCommandInteraction} param0 
+     * @param {Lang} lang
+     * @param {ChatInputCommandInteraction} int 
      */
-    async ttt({ int }) {
+    async ttt(int, lang) {
+        await int.deferReply();
+        
         new TicTacToe({
             message: int,
             opponent: int.options.getUser("player"),
@@ -81,11 +83,6 @@ module.exports = class Command {
                 color: '#5865F2',
                 statusTitle: 'Status',
                 overTitle: 'Game Over'
-            },
-            emojis: {
-                xButton: '✖',
-                oButton: '⚫',
-                blankButton: '➖'
             },
             mentionUser: true,
             timeoutTime: 60000,

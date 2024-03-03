@@ -20,9 +20,9 @@ module.exports = {
         if (command) {
             const { _subcommand, _group } = int.options;
 
-            if (_subcommand) await command[`${_subcommand}`]({ int, lang, _subcommand, commandName });
-            else if (_group && _subcommand) await command[`${_group}_${_subcommand}`]({ int, lang, _subcommand, _group, commandName});
-            else await command.run({ int, lang, commandName });
+            if (_subcommand) await command[`${_subcommand}`](int, lang);
+            else if (_group && _subcommand) await command[`${_group}_${_subcommand}`](int, lang);
+            else await command.run(int, lang);
         }
     }
 }
