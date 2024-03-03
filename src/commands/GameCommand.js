@@ -75,7 +75,6 @@ module.exports = class Command {
     async ttt({ int }) {
         new TicTacToe({
             message: int,
-            isSlashGame: true,
             opponent: int.options.getUser("player"),
             embed: {
                 title: 'Tic Tac Toe',
@@ -92,6 +91,8 @@ module.exports = class Command {
             timeoutTime: 60000,
             xButtonStyle: 'DANGER',
             oButtonStyle: 'PRIMARY',
+            rejectMessage: "abc",
+            requestMessage: "def",
             turnMessage: '{emoji} | Its turn of player **{player}**.',
             winMessage: '{emoji} | **{player}** won the TicTacToe Game.',
             tieMessage: 'The Game tied! No one won the Game!',

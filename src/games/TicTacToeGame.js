@@ -12,7 +12,7 @@ module.exports = class TicTacToe extends approve {
         }
     ) {
         super(options);
-        
+
         this.options = options;
         this.message = options.message;
         this.opponent = options.opponent;
@@ -35,7 +35,6 @@ module.exports = class TicTacToe extends approve {
 
 
     async TicTacToeGame(msg) {
-
         const embed = new EmbedBuilder()
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
@@ -49,7 +48,6 @@ module.exports = class TicTacToe extends approve {
 
     handleButtons(msg) {
         const collector = msg.createMessageComponentCollector({ idle: this.options.timeoutTime });
-
 
         collector.on('collect', async btn => {
             await btn.deferUpdate().catch(e => { });
