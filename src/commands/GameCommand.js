@@ -3,7 +3,6 @@ const {
     ChatInputCommandInteraction,
 } = require("discord.js"),
     { 
-        Emojify,
         TwoZeroFourEight,
         TicTacToe,
         Connect4
@@ -13,18 +12,10 @@ const {
 module.exports = class Command {
     /**
      * 
-     * @param {ChatInputCommandInteraction} int
-     */
-    async emojify(int){
-        int.reply({ ephemeral: true, content: Emojify(int.options.getString("message")) });
-    }
-
-    /**
-     * 
      * @param {ChatInputCommandInteraction} int 
      * @param {Lang} lang
      */
-    async tzfe(int, lang) {
+    async 2048(int, lang) {
         const Game = new TwoZeroFourEight({
             message: int,
             isSlashGame: true,
@@ -128,33 +119,7 @@ module.exports = class Command {
         .setDescription("Games for You to Play!")
         .addSubcommand(
             (sub) => sub
-                .setName("emojify")
-                .setNameLocalizations({
-                    "pt-BR": "emoticonizar"
-                })
-                .setDescription("Play Emojify!")
-                .setDescriptionLocalizations({
-                    "pt-BR": "Jogue Emoticonizar!"
-                })
-                .addStringOption(
-                    (str) => str
-                    .setRequired(true)
-                    .setName("message")
-                    .setNameLocalizations({
-                        "pt-BR": "mensagem"
-                    })
-                    .setDescription("The Message.")
-                    .setDescriptionLocalizations({
-                        "pt-BR": "A Mensagem."
-                    })
-                )
-        )
-        .addSubcommand(
-            (sub) => sub
-                .setName("tzfe")
-                .setNameLocalizations({
-                    "pt-BR": "dzqo"
-                })
+                .setName("2048")
                 .setDescription("Play 2048!")
                 .setDescriptionLocalizations({
                     "pt-BR": "Jogue 2048!"
