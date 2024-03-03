@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MrBot</title>
+</head>
+
+<body>
+    <button className="on">Ligar Bot</button>
+    <script>
+        const button = document.getElementsByTagName("button");
+
+        for (var i = 0; i < botoes.length; i++) {
+            if (botoes[i].className === "on") {
+                require("./index.js")
+            }
+        }
+    </script>
+</body>
+</html>
