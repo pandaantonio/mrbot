@@ -13,7 +13,6 @@ module.exports = {
     run: async (int) => {
         if (!int.isChatInputCommand()) return;
 
-        const { commandName } = int;
         const lang = require("../locales/pt-BR.json");
         const command = commands.find((c) => c.data.name === int.commandName);
 
