@@ -21,7 +21,7 @@ module.exports = {
 
             if (_subcommand) await command[`${_subcommand}`](int, lang);
             else if (_group && _subcommand) await command[`${_group}_${_subcommand}`](int, lang);
-            else await command.run(int, lang);
+            else await command[int.commandName](int, lang);
         }
     }
 }
