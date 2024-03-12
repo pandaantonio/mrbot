@@ -25,9 +25,16 @@ module.exports = class Command {
         int.editReply({ content, embeds: [embed] });
     }
 
+    // Data Command
     data = new SlashCommandBuilder()
         .setName("embedcreator")
+        .setNameLocalizations({
+            "pt-BR": "criarembed"
+        })
         .setDescription("This creates a custom embed.")
+        .setDescriptionLocalizations({
+            "pt-BR": "Isso cria uma embed personalizada."
+        })
         .addStringOption((op) => op.setName("title").setDescription("This is the title of the embed.").setRequired(true))
         .addStringOption((op) => op.setName("description").setDescription("This is the description of the embed.").setRequired(true))
         .addStringOption((op) => op.setName("content").setDescription("This is the content of the message.").setRequired(false))

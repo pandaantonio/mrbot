@@ -1,5 +1,5 @@
-const { ChatInputCommandInteraction, SlashCommandBuilder } = require("discord.js"),
-    math = require("mathjs");
+const { ChatInputCommandInteraction, SlashCommandBuilder } = require("discord.js");
+const math = require("mathjs");
 
 module.exports = class {
     /**
@@ -18,6 +18,7 @@ module.exports = class {
         }
     }
 
+    //Data Command
     data = new SlashCommandBuilder()
         .setName("calc")
         .setDescription("Use the calculator on discord.")
@@ -26,16 +27,14 @@ module.exports = class {
             "es-ES": "Usa la calculadora en discordia."
         })
         .addStringOption(
-            (str) => str.setName("expression")
+            (op) => op.setName("expression")
                 .setNameLocalizations({
-                    "pt-BR": "expressão",
-                    "es-ES": "expresión"
-                })
-                .setDescription("The Math Expression.")
-                .setDescriptionLocalizations({
-                    "pt-BR": "A Expressão Matemática.",
-                    "es-ES": "La expresión matemática."
+                    "pt-BR": "expressão"
                 })
                 .setRequired(true)
-        );
+                .setDescription("Math Expression.")
+                .setDescriptionLocalizations({
+                    "pt-BR": "Expressão Matemática."
+                })
+        )
 };
