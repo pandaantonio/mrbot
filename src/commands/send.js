@@ -1,0 +1,139 @@
+const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
+
+module.exports = class Command {
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
+    async send_embed(int) {
+        await int.deferReply({ ephemeral: false });
+
+        const title = int.options.getString("title"),
+            description = int.options.getString("description"),
+            color = int.options.getString("color"),
+            image = int.options.getString("image"),
+            thumbnail = int.options.getString("thumbnail"),
+            content = int.options.getString("content") || " ";
+
+        let embed = new EmbedBuilder()
+            .setColor(color)
+            .setTitle(title)
+            .setDescription(description)
+
+        if (image) embed.setImage(image);
+        if (thumbnail) embed.setThumbnail(thumbnail);
+
+        int.editReply({ content, embeds: [embed] });
+    }
+
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
+    async send_message(int) {
+        await int.deferReply();
+
+        let content = int.options.getString("content");
+
+        int.editReply(content);
+    }
+
+    // Data Command
+    data = new SlashCommandBuilder()
+        .setName("send")
+        .setNameLocalizations({
+            "pt-BR": "enviar"
+        })
+        .setDescription("Send a Personalized Message.")
+        .setDescriptionLocalizations({
+            "pt-BR": "Envie uma mensagem personalizada."
+        })
+        .addSubcommand(
+            (sub) => sub.setName("message")
+                .setNameLocalizations({
+                    "pt-BR": "mensagem"
+                })
+                .setDescription("Send a Personalized Message.")
+                .setDescriptionLocalizations({
+                    "pt-BR": "Envie uma mensagem personalizada."
+                })
+                .addStringOption(
+                    (op) => op.setName("content")
+                        .setNameLocalizations({
+                            "pt-BR": "conteúdo"
+                        })
+                        .setDescription("This is the content of the message.")
+                        .setDescriptionLocalizations({
+                            "pt-BR": "Este é o conteúdo da mensagem."
+                        })
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand(
+            (sub) => sub.setName("embed")
+                .setDescription("Send a custom embed.")
+                .setDescriptionLocalizations({
+                    "pt-BR": "Envie uma embed personalizada."
+                })
+                .addStringOption(
+                    (op) => op.setName("title")
+                        .setNameLocalizations({
+                            "pt-BR": "título"
+                        })
+                        .setDescription("This is the title of the embed.")
+                        .setDescriptionLocalizations({
+                            "pt-BR": "Este é o título do embed."
+                        })
+                        .setRequired(true)
+                )
+                .addStringOption(
+                    (op) => op.setName("description")
+                        .setNameLocalizations({
+                            "pt-BR": "descrição"
+                        })
+                        .setDescription("This is the description of the embed.")
+                        .setDescriptionLocalizations({
+                            "pt-BR": "Esta é a descrição do embed."
+                        })
+                        .setRequired(true)
+                )
+                .addStringOption(
+                    (op) => op.setName("color")
+                        .setNameLocalizations({
+                            "pt-BR": "cor"
+                        })
+                        .setDescription("This is the color of the embed.")
+                        .setDescriptionLocalizations({
+                            "pt-BR": "Esta é a cor do embed."
+                        })
+                        .setRequired(true)
+                )
+                .addStringOption(
+                    (op) => op.setName("content")
+                        .setNameLocalizations({
+                            "pt-BR": "conteúdo"
+                        })
+                        .setDescription("This is the content of the message.")
+                        .setDescriptionLocalizations({
+                            "pt-BR": "Este é o conteúdo da mensagem."
+                        })
+                        .setRequired(false)
+                )
+                .addStringOption(
+                    (op) => op.setName("image")
+                        .setDescription("This is the image of the embed.")
+                        .setDescriptionLocalizations({
+                            "pt-BR": "Esta é a imagem do embed."
+                        })
+                        .setRequired(false)
+                )
+                .addStringOption(
+                    (op) => op.setName("thumbnail")
+                        .setDescription("This is the thumbnail of the embed.")
+                        .setDescriptionLocalizations({
+                            "pt-BR": "Esta é a thumbnail do embed."
+                        })
+                        .setRequired(false)
+                )
+        )
+};
