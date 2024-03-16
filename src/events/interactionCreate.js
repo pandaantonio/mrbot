@@ -1,6 +1,4 @@
-const getCommands = require("../utils/getCommands"),
-    { ChatInputCommandInteraction } = require("discord.js"),
-    commands = getCommands();
+const { ChatInputCommandInteraction } = require("discord.js");
 
 module.exports = class Event {
     static name = "interactionCreate";
