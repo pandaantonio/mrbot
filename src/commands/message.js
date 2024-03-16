@@ -7,7 +7,7 @@ module.exports = class Command {
      * 
      * @param {ChatInputCommandInteraction} int 
      */
-    static async run(int) {
+    static run = async (int) => {
         await int.deferReply();
 
         let content = int.options.getString("content");
