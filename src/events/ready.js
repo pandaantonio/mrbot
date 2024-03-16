@@ -12,7 +12,7 @@ module.exports = {
     run: async (bot) => {
         console.log(`${bot.user.username} is online!`);
 
-        const commands = [],
+        const cmds = [], commands = [],
             rest = new REST({ version: '10' }).setToken(process.env.TOKEN),
             files = getAllFiles(join(__dirname, '..', 'commands'), true);
 
@@ -20,8 +20,10 @@ module.exports = {
             const command = require(file);
 
             commands.push(command);
+
+            if (command.data) cmds.push(command.data);
         }
 
-        await rest.put(Routes.applicationCommands(bot.user.id), { body: commands.map((c) => c.data) });
+        await rest.put(Routes.applicationCommands(bot.user.id), { body: cmds });
     }
 }

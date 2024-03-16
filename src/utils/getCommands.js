@@ -8,7 +8,7 @@ module.exports = () => {
     for (const file of files) {
         const command = require(file);
 
-        commands.push(new command());
+        commands.push(command);
     }
 
     return commands;
