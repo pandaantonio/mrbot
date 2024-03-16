@@ -1,7 +1,7 @@
 const { ChatInputCommandInteraction, SlashCommandBuilder } = require("discord.js");
 const math = require("mathjs");
 
-class Command {
+module.exports = class Command {
     static name = "calc";
 
     /**
@@ -39,5 +39,3 @@ class Command {
                 })
         )
 };
-
-module.exports = new Command();

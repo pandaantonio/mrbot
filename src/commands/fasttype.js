@@ -1,7 +1,7 @@
 const { ChatInputCommandInteraction } = require("discord.js"),
     { FastType } = require("discord-gamecord");
 
-class Command {
+module.exports = class Command {
     static name = "play fasttype";
 
     /**
@@ -26,5 +26,3 @@ class Command {
         }).startGame();
     }
 };
-
-module.exports = new Command();

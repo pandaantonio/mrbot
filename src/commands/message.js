@@ -1,6 +1,6 @@
 const { ChatInputCommandInteraction } = require("discord.js");
 
-class Command {
+module.exports = class Command {
     static name = "send message";
 
     /**
@@ -15,5 +15,3 @@ class Command {
         int.editReply(content);
     }
 }
-
-module.exports = new Command();

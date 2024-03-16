@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-class Command {
+module.exports = class Command {
     static data = new SlashCommandBuilder()
         .setName("send")
         .setNameLocalizations({
@@ -99,5 +99,3 @@ class Command {
                 )
         )
 }
-
-module.exports = new Command();

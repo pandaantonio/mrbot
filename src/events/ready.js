@@ -21,6 +21,8 @@ module.exports = {
 
             commands.push(command);
 
+            console.log(command);
+
             if (command.data) cmds.push(command.data);
         }
 

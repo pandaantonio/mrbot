@@ -18,6 +18,6 @@ module.exports = {
         let name = int.commandName + _group ? ` ${_group}` : "" + _subcommand ? ` ${_subcommand}` : "";
         const command = commands.find((c) => c.name === name)
 
-        if (command) await command.run(int);
+        if (command) await command.run(int, lang);
     }
 }

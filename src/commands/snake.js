@@ -1,7 +1,7 @@
 const { ChatInputCommandInteraction } = require("discord.js"),
     { Snake } = require("discord-gamecord");
 
-class Command {
+module.exports = class Command {
     static name = "play snake";
 
     /**
@@ -35,5 +35,3 @@ class Command {
         }).startGame();
     }
 };
-
-module.exports = new Command();

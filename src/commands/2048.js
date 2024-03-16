@@ -1,7 +1,7 @@
 const { ChatInputCommandInteraction } = require("discord.js"),
     { TwoZeroFourEight } = require("discord-gamecord");
 
-class Command {
+module.exports = class Command {
     static name = "play 2048";
 
     /**
@@ -28,5 +28,3 @@ class Command {
         }).startGame();
     }
 };
-
-module.exports = new Command();
