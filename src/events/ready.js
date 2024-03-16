@@ -2,14 +2,14 @@ const { Client, REST, Routes } = require("discord.js"),
     getAllFiles = require("../utils/getAllFiles"),
     { join } = require("path");
 
-module.exports = {
-    name: "ready",
+module.exports = class {
+    static name = "ready";
 
     /**
      * 
      * @param {Client} bot 
      */
-    run: async (bot) => {
+    static run = async (bot) => {
         console.log(`${bot.user.username} is online!`);
 
         const cmds = [], commands = [],
