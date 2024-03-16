@@ -1,6 +1,13 @@
+const { ChatInputCommandInteraction } = require("discord.js"),
+    { FastType } = require("discord-gamecord");
+
 module.exports = class Command {
     static name = "play fasttype";
 
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
     static async run(int) {
         await int.deferReply();
 

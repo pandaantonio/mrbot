@@ -1,6 +1,13 @@
+const { ChatInputCommandInteraction } = require("discord.js"),
+    { Minesweeper } = require("discord-gamecord");
+
 module.exports = class Command {
     static name = "play minesweeper";
 
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
     static async run(int) {
         await int.deferReply();
 

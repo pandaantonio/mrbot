@@ -1,6 +1,13 @@
+const { ChatInputCommandInteraction } = require("discord.js"),
+    { TwoZeroFourEight } = require("discord-gamecord");
+
 module.exports = class Command {
     static name = "play 2048";
 
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
     static async run(int) {
         new TwoZeroFourEight({
             message: int,
