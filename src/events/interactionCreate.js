@@ -13,15 +13,7 @@ module.exports = class Event {
     static run = async (int) => {
         if (!int.isChatInputCommand()) return;
 
-        let name = int.commandName,
-            subcommand = int.options.getSubcommand(),
-            group = int.options.getSubcommandGroup();
-
-        if (subcommand && !group) name += ` ${subcommand}`;
-        else if (subcommand && group) name += ` ${group} ${subcommand}`;
-        else name = int.commandName;
-
-        const command = commands.find((c) => c.name === name);
+        const command = commands.find((c) => c.name === int.commandName);
         const lang = require("../locales/pt-BR.json");
 
         console.log(name);
