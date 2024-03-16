@@ -1,6 +1,6 @@
 const { ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 
-module.exports = class {
+class Command {
     static name = "send embed";
 
     /**
@@ -28,3 +28,5 @@ module.exports = class {
         int.editReply({ content, embeds: [embed] });
     }
 };
+
+module.exports = new Command();

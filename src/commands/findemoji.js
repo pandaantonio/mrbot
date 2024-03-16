@@ -1,7 +1,7 @@
 const { ChatInputCommandInteraction } = require("discord.js"),
     { FindEmoji } = require("discord-gamecord");
 
-module.exports = class Command {
+class Command {
     static name = "play findemoji";
 
     /**
@@ -31,3 +31,5 @@ module.exports = class Command {
         }).startGame();
     }
 };
+
+module.exports = new Command();

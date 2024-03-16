@@ -1,13 +1,13 @@
 const { ChatInputCommandInteraction } = require("discord.js");
 
-module.exports = class {
+class Command {
     static name = "send message";
 
     /**
      * 
      * @param {ChatInputCommandInteraction} int 
      */
-    async run(int) {
+    static async run(int) {
         await int.deferReply();
 
         let content = int.options.getString("content");
@@ -15,3 +15,5 @@ module.exports = class {
         int.editReply(content);
     }
 }
+
+module.exports = new Command();

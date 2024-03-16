@@ -15,10 +15,9 @@ module.exports = {
 
         const lang = require("../locales/pt-BR.json");
         const { _subcommand, _group } = int.options;
-        const command = commands.find((c) => c.name === `${int.commandName}${_group ? ` ${_group}` : ""}${_subcommand ? ` ${_subcommand}` : ""}`)
+        let name = int.commandName + _group ? ` ${_group}` : "" + _subcommand ? ` ${_subcommand}` : "";
+        const command = commands.find((c) => c.name === name)
 
-        if (command) {
-            await command.run(int);
-        }
+        if (command) await command.run(int);
     }
 }
