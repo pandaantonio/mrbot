@@ -2,11 +2,13 @@ const { ChatInputCommandInteraction, SlashCommandBuilder } = require("discord.js
 const math = require("mathjs");
 
 module.exports = class {
+    static name = "calc";
+
     /**
      * 
      * @param {ChatInputCommandInteraction} int 
      */
-    async calc(int) {
+    static async run(int) {
         await int.deferReply();
 
         try {
@@ -18,8 +20,7 @@ module.exports = class {
         }
     }
 
-    //Data Command
-    data = new SlashCommandBuilder()
+    static data = new SlashCommandBuilder()
         .setName("calc")
         .setDescription("Use the calculator on discord.")
         .setDescriptionLocalizations({
