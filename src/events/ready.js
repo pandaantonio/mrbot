@@ -17,11 +17,11 @@ module.exports = {
             files = getAllFiles(join(__dirname, '..', 'commands'), true);
 
         for (const file of files) {
-            const command = new (require(file));
+            const command = require(file);
 
-            if (command.data) commands.push(command.data);
+            commands.push(command);
         }
 
-        await rest.put(Routes.applicationCommands(bot.user.id), { body: commands });
+        await rest.put(Routes.applicationCommands(bot.user.id), { body: commands.map((c) => c.data) });
     }
 }
