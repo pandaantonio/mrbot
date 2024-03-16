@@ -10,7 +10,7 @@ module.exports = class Command {
 
         const title = int.options.getString("title"),
             description = int.options.getString("description"),
-            color = int.options.getString("color"),
+            color = int.options.getString("color") || "Random",
             image = int.options.getString("image"),
             thumbnail = int.options.getString("thumbnail"),
             content = int.options.getString("content") || " ";
@@ -106,7 +106,7 @@ module.exports = class Command {
                         .setDescriptionLocalizations({
                             "pt-BR": "Esta é a cor do embed."
                         })
-                        .setRequired(true)
+                        .setRequired(false)
                 )
                 .addStringOption(
                     (op) => op.setName("content")

@@ -14,14 +14,11 @@ module.exports = {
         if (!int.isChatInputCommand()) return;
 
         const lang = require("../locales/pt-BR.json");
-        const command = commands.find((c) => c.data.name === int.commandName);
+        const { _subcommand, _group } = int.options;
+        const command = commands.find((c) => c.name === `${int.commandName}${_group ? ` ${_group}` : ""}${_subcommand ? ` ${_subcommand}` : ""}`)
 
         if (command) {
-            const { _subcommand, _group } = int.options;
-
-            if (_subcommand) await command[`${int.commandName}_${_subcommand}`](int, lang);
-            else if (_group && _subcommand) await command[`${int.commandName}_${_group}_${_subcommand}`](int, lang);
-            else await command[int.commandName](int, lang);
+            await command.run(int);
         }
     }
 }

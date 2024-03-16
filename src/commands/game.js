@@ -1,7 +1,112 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction } = require("discord.js");
-const { TicTacToe } = require("discord-gamecord");
+const { TicTacToe, Snake, TwoZeroFourEight, FastType, FindEmoji, Minesweeper } = require("discord-gamecord");
 
 module.exports = class Command {
+
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
+    async play_findemoji(int) {
+        await int.deferReply();
+
+        new FindEmoji({
+            message: int,
+            isSlashGame: true,
+            embed: {
+                title: 'Encontre o emoji',
+                color: '#5865F2',
+                description: 'Lembre-se dos emojis do quadro abaixo.',
+                findDescription: 'Encontre o emoji {emoji} antes que o tempo acabe.'
+            },
+            timeoutTime: 60000,
+            hideEmojiTime: 5000,
+            buttonStyle: 'PRIMARY',
+            emojis: ['🍉', '🍇', '🍊', '🍋', '🥭', '🍎', '🍏', '🥝'],
+            winMessage: 'Você ganhou! Você selecionou o emoji correto. {emoji}',
+            loseMessage: 'Você perdeu! Você selecionou o emoji errado. {emoji}',
+            timeoutMessage: 'Você perdeu! Acabou seu tempo. O emoji é {emoji}',
+            playerOnlyMessage: 'Apenas {player} pode usar esses botões.'
+        }).startGame();
+    }
+
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
+    async play_fasttype(int) {
+        await int.deferReply();
+
+        new FastType({
+            message: int,
+            isSlashGame: true,
+            embed: {
+                title: 'Tipo rápido',
+                color: '#5865F2',
+                description: 'Você tem {time} segundos para digitar a frase abaixo.'
+            },
+            timeoutTime: 60000,
+            sentence: 'Algumas frases muito legais para digitar rapidamente.',
+            winMessage: 'Você ganhou! Você terminou o tipo corrida em {time} segundos com ppm de {ppm}.',
+            loseMessage: 'Você perdeu! Você não digitou a frase correta a tempo.',
+        }).startGame();
+    }
+
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
+    async play_2048(int) {
+        new TwoZeroFourEight({
+            message: int,
+            isSlashGame: true,
+            embed: {
+                title: '2048',
+                color: '#5865F2'
+            },
+            emojis: {
+                up: '⬆️',
+                down: '⬇️',
+                left: '⬅️',
+                right: '➡️',
+            },
+            timeoutTime: 60000,
+            buttonStyle: 'PRIMARY',
+            playerOnlyMessage: 'Apenas {player} pode usar esses botões.'
+        }).startGame();
+    }
+
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} int 
+     */
+    async play_snake(int) {
+        await int.deferReply();
+
+        new Snake({
+            message: int,
+            isSlashGame: true,
+            embed: {
+                title: 'Jogo Da Cobrinha',
+                overTitle: 'Fim de jogo',
+                color: '#5865F2'
+            },
+            emojis: {
+                board: '⬛',
+                food: '🍎',
+                up: '⬆️',
+                down: '⬇️',
+                left: '⬅️',
+                right: '➡️',
+            },
+            stopButton: 'Stop',
+            timeoutTime: 60000,
+            snake: { head: '🟢', body: '🟩', tail: '🟢', over: '💀' },
+            foods: ['🍎', '🍇', '🍊', '🫐', '🥕', '🥝', '🌽'],
+            playerOnlyMessage: 'Apenas {player} pode usar esses botões.'
+        }).startGame();
+    }
+
     /**
      * 
      * @param {ChatInputCommandInteraction} int 
@@ -46,14 +151,67 @@ module.exports = class Command {
     data = new SlashCommandBuilder()
         .setName("play")
         .setNameLocalizations({
-            "pt-BR": "iniciar"
+            "pt-BR": "jogar"
         })
         .setDescription("Let's Play?")
         .setDescriptionLocalizations({
             "pt-BR": "Vamos iniciar?"
         })
         .addSubcommand(
-            (sub) => sub.setName("tictactoe")
+            (sub) => sub
+                .setName("minesweeper")
+                .setNameLocalizations({
+                    "pt-BR": "campominado"
+                })
+                .setDescription("Play the game minesweeper on discord.")
+                .setDescriptionLocalizations({
+                    "pt-BR": "Jogue o jogo da caça minas no discord."
+                })
+        )
+        .addSubcommand(
+            (sub) => sub
+                .setName("findemoji")
+                .setNameLocalizations({
+                    "pt-BR": "encontreoemoji"
+                })
+                .setDescription("Play the game find emoji on discord.")
+                .setDescriptionLocalizations({
+                    "pt-BR": "Jogue o jogo da encontre o emoji no discord."
+                })
+        )
+        .addSubcommand(
+            (sub) => sub
+            .setName("fasttype")
+                .setNameLocalizations({
+                    "pt-BR": "escrevarápido"
+                })
+                .setDescription("Play the game find emoji on discord.")
+                .setDescriptionLocalizations({
+                    "pt-BR": "Jogue o jogo da tipo rápido no discord."
+                })
+        )
+        .addSubcommand(
+            (sub) => sub
+                .setName("2048")
+                .setDescription("Play the game 2048 on discord.")
+                .setDescriptionLocalizations({
+                    "pt-BR": "Jogue o jogo da 2048 no discord."
+                })
+        )
+        .addSubcommand(
+            (sub) => sub
+                .setName("snake")
+                .setDescription("Play the snake game on discord.")
+                .setNameLocalizations({
+                    "pt-BR": "cobrinha"
+                })
+                .setDescriptionLocalizations({
+                    "pt-BR": "Jogue o jogo da cobra no discord."
+                })
+        )
+        .addSubcommand(
+            (sub) => sub
+                .setName("tictactoe")
                 .setNameLocalizations({
                     "pt-BR": "jogodavelha"
                 })

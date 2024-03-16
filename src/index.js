@@ -3,6 +3,7 @@ const { Client, IntentsBitField } = require('discord.js'),
     bot = new Client({
         intents: [
             IntentsBitField.Flags.Guilds,
+            IntentsBitField.Flags.GuildMessages,
         ],
     });
 
