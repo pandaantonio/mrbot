@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction } = require("discord.js");
+const math = require("mathjs");
 
 module.exports = {
     data: new SlashCommandBuilder()

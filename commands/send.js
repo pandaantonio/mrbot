@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChatInputCommandInteraction } = require("discord.js");
+const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -108,11 +108,15 @@ module.exports = {
 
         const subcommand = interaction.options.getSubcommand();
 
+        //message
         if (subcommand === "message") {
             let content = interaction.options.getString("content");
 
             interaction.editReply(content);
-        } else {
+        } 
+
+        //embed
+        else {
             const title = interaction.options.getString("title"),
                 description = interaction.options.getString("description"),
                 color = interaction.options.getString("color") || "Random",
