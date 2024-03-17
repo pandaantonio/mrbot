@@ -1,4 +1,5 @@
 const { ChatInputCommandInteraction } = require("discord.js");
+const getCommands = require("../utils/getCommands");
 
 module.exports = class Event {
     static name = "interactionCreate";
@@ -15,6 +16,9 @@ module.exports = class Event {
         if(interaction.options?._group) name += " " + interaction.options?._group;
         if(interaction.options?._subcommand) name += " " + interaction.options?._subcommand;
 
-        console.log(name);
+        let commands = getCommands();
+        let command = commands.find((c) => c.name === name);
+
+        if(command) await command.run(interaction);
     }
 };

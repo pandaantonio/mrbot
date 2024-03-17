@@ -4,6 +4,22 @@ const math = require("mathjs");
 module.exports = class Command {
     static name = "calc";
 
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} interaction 
+     */
+    static run = async function (interaction) {
+        await interaction.deferReply();
+
+        try {
+            const res = math.evaluate(interaction.options.getString("expression"));
+
+            interaction.editReply(`\`\`\`${res}\`\`\``);
+        } catch (err) {
+            interaction.editReply(`\`\`\`${err}\`\`\``);
+        }
+    };
+
     static data = new SlashCommandBuilder()
         .setName("calc")
         .setDescription("Use the calculator on discord.")
@@ -22,16 +38,4 @@ module.exports = class Command {
                     "pt-BR": "Expressão Matemática."
                 })
         );
-
-    static run = async function (interaction) {
-        await interaction.deferReply();
-
-        try {
-            const res = math.evaluate(interaction.options.getString("expression"));
-
-            interaction.editReply(`\`\`\`${res}\`\`\``);
-        } catch (err) {
-            interaction.editReply(`\`\`\`${err}\`\`\``);
-        }
-    }
 };
