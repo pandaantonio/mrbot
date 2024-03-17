@@ -3,7 +3,7 @@ require("dotenv/config");
 const { Client, IntentsBitField } = require('discord.js');
 const { join } = require("path");
 const { CommandHandler } = require("djs-commander");
-const bot = new Client({
+const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMessages,
@@ -11,8 +11,9 @@ const bot = new Client({
 });
 
 new CommandHandler({
-    client: bot,
+    client,
     commandsPath: join(__dirname, "commands"),
+    eventsPath: join(__dirname, "events")
 });
 
-bot.login(process.env.TOKEN);
+client.login(process.env.TOKEN);
