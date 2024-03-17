@@ -1,8 +1,7 @@
 require("dotenv/config");
 
 const { Client, IntentsBitField } = require('discord.js');
-const { join } = require("path");
-const { CommandHandler } = require("djs-commander");
+const { glob } = require("glob");
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
@@ -10,10 +9,8 @@ const client = new Client({
     ],
 });
 
-new CommandHandler({
-    client,
-    commandsPath: join(__dirname, "commands"),
-    eventsPath: join(__dirname, "events")
-});
+client.login(process.env.TOKEN).then(async () => {
+    const eventFiles = await glob("src/events/**/*.js");
 
-client.login(process.env.TOKEN);
+    console.log(eventFiles);
+});
