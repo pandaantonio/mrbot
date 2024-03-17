@@ -1,5 +1,3 @@
-const { Client } = require("discord.js");
-
 module.exports = class Event {
     static name = "ready";
 
@@ -7,7 +5,7 @@ module.exports = class Event {
      * 
      * @param {Client} client 
      */
-    static run = async function(client){
-        console.log(`${client.user.tag} is online!`)
+    static run = async function (client) {
+        console.log(`${client.user.tag} is online!`);
     }
 };

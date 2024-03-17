@@ -1,9 +1,6 @@
 require("dotenv/config");
-
 const { Client, IntentsBitField } = require('discord.js');
-const { promisify } = require("util")
-const { glob } = require("glob");
-const pg = promisify(glob);
+const { globSync } = require("glob");
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
@@ -11,13 +8,12 @@ const client = new Client({
     ],
 });
 
-client.login(process.env.TOKEN).then(async () => {
-    const eventFiles = await pg("src/events/**/*.js");
-    console.log(eventFiles);
+const eventFiles = globSync("src/events/**/*.js");
 
-    for(const file of eventFiles){
-        const event = require(`${__dirname}\\${file}`);
+for (file of eventFiles) {
+    const event = require(`${__dirname}\\${file}`);
 
-        client.on(event.name, async (...args) => await event.run(...args));
-    }
-});
+    client.on(event.name, async (...args) => await event.run(...args));
+}
+
+client.login(process.env.TOKEN);
