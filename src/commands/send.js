@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, ChatInputCommandInteraction } = require("discord.js");
 
-module.exports = class Command {
-    static data = new SlashCommandBuilder()
+module.exports = {
+    data: new SlashCommandBuilder()
         .setName("send")
         .setNameLocalizations({
             "pt-BR": "enviar"
@@ -97,5 +97,38 @@ module.exports = class Command {
                         })
                         .setRequired(false)
                 )
-        )
-}
+        ),
+
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} param0 
+     */
+    run: async ({ interaction }) => {
+        await interaction.deferReply();
+
+        const subcommand = interaction.options.getSubcommand();
+
+        if (subcommand === "message") {
+            let content = interaction.options.getString("content");
+
+            interaction.editReply(content);
+        } else {
+            const title = interaction.options.getString("title"),
+                description = interaction.options.getString("description"),
+                color = interaction.options.getString("color") || "Random",
+                image = interaction.options.getString("image"),
+                thumbnail = interaction.options.getString("thumbnail"),
+                content = interaction.options.getString("content") || " ";
+
+            let embed = new EmbedBuilder()
+                .setColor(color)
+                .setTitle(title)
+                .setDescription(description)
+
+            if (image) embed.setImage(image);
+            if (thumbnail) embed.setThumbnail(thumbnail);
+
+            interaction.editReply({ content, embeds: [embed] });
+        }
+    }
+};
